@@ -1,8 +1,7 @@
 name: entrance_test
-description: A new Flutter project.
-publish_to: "none"
 version: 18.1.31
-
+publish_to: none
+description: A new Flutter project.
 environment:
   sdk: ">=3.0.6 <4.0.0"
 
@@ -11,22 +10,28 @@ dependencies:
   cached_network_image: ^3.3.1
   dio: ^5.4.3+1
   dynamic_height_grid_view: ^0.0.4
-  flutter:
-    sdk: flutter
-
   get: ^4.6.6
   get_storage: ^2.1.1
   intl: ^0.19.0
   talker_dio_logger: ^4.2.0
+  package_info_plus: 8.0.0
+  rename: 3.0.2
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
+  flutter_launcher_icons: 0.13.1
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+
+flutter_icons:
+  image_path: assets/images/logo_image.png
+  android: true
+  ios: true
 
 flutter:
-  uses-material-design: true
-
   assets:
     - assets/icons/
     - assets/images/
+  uses-material-design: true
