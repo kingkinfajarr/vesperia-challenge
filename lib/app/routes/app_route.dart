@@ -1,4 +1,5 @@
 import 'package:entrance_test/app/routes/route_name.dart';
+import 'package:entrance_test/splash_page.dart';
 import 'package:entrance_test/src/features/dashboard/component/dashboard_binding.dart';
 import 'package:entrance_test/src/features/dashboard/dashboard_page.dart';
 import 'package:entrance_test/src/features/dashboard/profile/edit/edit_profile_page.dart';
@@ -10,6 +11,10 @@ import '../../src/features/login/login_page.dart';
 
 class AppRoute {
   static final pages = [
+    GetPage(
+      name: RouteName.splash,
+      page: () => const SplashPage(),
+    ),
     GetPage(
       name: RouteName.login,
       page: () => const LoginPage(),

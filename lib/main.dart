@@ -7,6 +7,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'app/app_binding.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await initializeDateFormatting('en_EN', null)
       .then((_) => runApp(const MainApp()));
 }
@@ -18,7 +20,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "Entrance Test",
-      initialRoute: RouteName.login,
+      initialRoute: RouteName.splash,
       getPages: AppRoute.pages,
       initialBinding: AppBinding(),
       debugShowCheckedModeBanner: false,
