@@ -1,4 +1,3 @@
-
 const ic_password = 'assets/icons/icon-password.png';
 
 const ic_home = 'assets/icons/icon-home.png';
@@ -23,3 +22,6 @@ const ic_empty_data = 'assets/icons/icon-empty-data.png';
 const ic_error_image = 'assets/icons/icon-error-image.png';
 const ic_favorite_empty = 'assets/icons/icon-favorite-empty.png';
 const ic_favorite_filled = 'assets/icons/icon-favorite-filled.png';
+
+const ic_visible = 'assets/icons/icon-visible.png';
+const ic_invisible = 'assets/icons/icon-invisible.png';

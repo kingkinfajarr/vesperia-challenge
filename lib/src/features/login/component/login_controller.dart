@@ -7,6 +7,7 @@ import '../../../widgets/snackbar_widget.dart';
 
 class LoginController extends GetxController {
   final UserRepository _userRepository;
+  RxBool obscureText = true.obs;
 
   LoginController({
     required UserRepository userRepository,
@@ -22,5 +23,9 @@ class LoginController extends GetxController {
     }
     await _userRepository.login();
     Get.offAllNamed(RouteName.dashboard);
+  }
+
+  void togglePasswordVisibility() {
+    obscureText.value = !obscureText.value;
   }
 }
