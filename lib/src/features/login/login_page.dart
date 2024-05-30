@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
 
@@ -135,12 +136,27 @@ class LoginPage extends GetView<LoginController> {
                         ),
                       ),
                     ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))
+                    ],
                     controller: controller.etPhone,
                   ),
+                  Obx(
+                    () => controller.phoneError.isNotEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              controller.phoneError.value,
+                              style: const TextStyle(color: red500),
+                            ),
+                          )
+                        : Container(),
+                  )
                 ],
               ),
               const SizedBox(height: 24),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -218,6 +234,17 @@ class LoginPage extends GetView<LoginController> {
                       controller: controller.etPassword,
                     ),
                   ),
+                  Obx(
+                    () => controller.passwordError.isNotEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              controller.passwordError.value,
+                              style: const TextStyle(color: red500),
+                            ),
+                          )
+                        : Container(),
+                  )
                 ],
               ),
               const SizedBox(height: 24),
