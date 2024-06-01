@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
 
 import '../../constants/color.dart';
 import '../../constants/icon.dart';
@@ -257,7 +256,7 @@ class LoginPage extends GetView<LoginController> {
     );
   }
 
-  Widget loginButton() => SizedBox(
+  Widget loginButton() => Obx(() => SizedBox(
       height: 52,
       width: double.infinity,
       child: SizedBox(
@@ -270,6 +269,7 @@ class LoginPage extends GetView<LoginController> {
           onClick: () {
             controller.doLogin();
           },
+          isLoading: controller.isLoading.value,
         ),
-      ));
+      )));
 }

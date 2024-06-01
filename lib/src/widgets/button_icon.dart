@@ -12,6 +12,7 @@ class ButtonIcon extends StatelessWidget {
     required this.onClick,
     required this.textLabel,
     this.side,
+    this.isLoading = false,
   }) : super(key: key);
 
   final Color? buttonColor;
@@ -23,44 +24,62 @@ class ButtonIcon extends StatelessWidget {
   final Function onClick;
   final String textLabel;
   final BorderSide? side;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton.icon(
+    return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: buttonColor,
         shape: borderColor != null
             ? RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-          side: BorderSide(width: 1.5, color: borderColor!),
-        )
+                borderRadius: BorderRadius.circular(8),
+                side: BorderSide(width: 1.5, color: borderColor!),
+              )
             : RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+                borderRadius: BorderRadius.circular(8),
+              ),
         splashFactory: NoSplash.splashFactory,
         elevation: 0,
         side: side,
       ),
       onPressed: () {
-        onClick();
+        if (!isLoading) {
+          onClick();
+        }
       },
-      icon: (iconSource != null)
-          ? Image.asset(
-        iconSource ?? "",
-        height: iconSize ?? 24,
-        width: iconSize ?? 24,
-      )
-          : icon != null
-          ? Icon(icon, size: iconSize ?? 24)
-          : const SizedBox.shrink(),
-      label: Text(
-        textLabel,
-        style: TextStyle(
-          fontSize: 14,
-          color: textColor,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
+      child: isLoading
+          ? const SizedBox(
+              height: 24,
+              width: 24,
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                strokeWidth: 2,
+              ),
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (iconSource != null)
+                  Image.asset(
+                    iconSource ?? "",
+                    height: iconSize ?? 24,
+                    width: iconSize ?? 24,
+                  )
+                else if (icon != null)
+                  Icon(icon, size: iconSize ?? 24),
+                if (iconSource != null || icon != null)
+                  const SizedBox(width: 8),
+                Text(
+                  textLabel,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: textColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

@@ -10,6 +10,7 @@ class LoginController extends GetxController {
   RxBool obscureText = true.obs;
   RxString phoneError = ''.obs;
   RxString passwordError = ''.obs;
+  RxBool isLoading = false.obs;
 
   LoginController({
     required UserRepository userRepository,
@@ -23,12 +24,17 @@ class LoginController extends GetxController {
       return;
     }
 
+    isLoading.value = true;
+
     if (etPhone.text != '85173254399' || etPassword.text != '12345678') {
       SnackbarWidget.showFailedSnackbar('Email atau password salah');
+      isLoading.value = false;
       return;
     }
+
     await _userRepository.login();
     Get.offAllNamed(RouteName.dashboard);
+    isLoading.value = false;
   }
 
   bool validateInput() {
