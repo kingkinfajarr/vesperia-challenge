@@ -20,6 +20,10 @@ class ProfileController extends GetxController {
 
   String get profilePictureUrl => _profilePictureUrl.value;
 
+  final _isLoading = false.obs;
+
+  bool get isLoading => _isLoading.value;
+
   ProfileController({
     required UserRepository userRepository,
   }) : _userRepository = userRepository;
@@ -61,16 +65,14 @@ class ProfileController extends GetxController {
     await _userRepository.testUnauthenticated();
   }
 
-  onDownloadFileClick() async {
+  onDownloadFileClick() async {}
 
-  }
-
-  onOpenWebPageClick() {
-
-  }
+  onOpenWebPageClick() {}
 
   void doLogout() async {
+    _isLoading.value = true;
     await _userRepository.logout();
     Get.offAllNamed(RouteName.login);
+    _isLoading.value = false;
   }
 }
