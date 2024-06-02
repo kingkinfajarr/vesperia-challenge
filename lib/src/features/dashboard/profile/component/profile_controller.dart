@@ -65,7 +65,14 @@ class ProfileController extends GetxController {
     await _userRepository.testUnauthenticated();
   }
 
-  onDownloadFileClick() async {}
+  onDownloadFileClick(String url, String name) async {
+    try {
+      await _userRepository.downloadFile(url, name);
+      SnackbarWidget.showSuccessSnackbar("File downloaded successfully");
+    } catch (e) {
+      SnackbarWidget.showFailedSnackbar(NetworkingUtil.errorMessage(e));
+    }
+  }
 
   onOpenWebPageClick() {}
 

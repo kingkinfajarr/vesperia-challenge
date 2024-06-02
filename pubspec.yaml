@@ -2,10 +2,10 @@ name: entrance_test
 version: 18.1.31
 publish_to: none
 description: A new Flutter project.
-environment:
-  sdk: ">=3.0.6 <4.0.0"
+environment: 
+  sdk: '>=3.0.6 <4.0.0'
 
-dependencies:
+dependencies: 
   ansicolor: ^2.0.2
   cached_network_image: ^3.3.1
   dio: ^5.4.3+1
@@ -16,22 +16,24 @@ dependencies:
   talker_dio_logger: ^4.2.0
   package_info_plus: 8.0.0
   rename: 3.0.2
-  flutter:
+  path_provider: 2.1.3
+  flutter: 
     sdk: flutter
 
-dev_dependencies:
+dev_dependencies: 
   flutter_launcher_icons: 0.13.1
   flutter_lints: ^2.0.0
-  flutter_test:
+  flutter_test: 
     sdk: flutter
 
-flutter_icons:
+flutter_icons: 
   image_path: assets/images/logo_image.png
   android: true
   ios: true
 
-flutter:
-  assets:
+flutter: 
+  assets: 
     - assets/icons/
     - assets/images/
   uses-material-design: true
+

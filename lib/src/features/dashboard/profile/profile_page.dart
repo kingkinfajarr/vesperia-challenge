@@ -99,7 +99,10 @@ class ProfilePage extends GetView<ProfileController> {
                     controller.onTestUnauthenticatedClick();
                   }),
                   iconTileProfile(ic_download, "Download File", () {
-                    controller.onDownloadFileClick();
+                    controller.onDownloadFileClick(
+                      'https://www.tutorialspoint.com/flutter/flutter_tutorial.pdf',
+                      'file.pdf',
+                    );
                   }),
                   iconTileProfile(ic_webpage, "Open Webpage", () {
                     controller.onOpenWebPageClick();
