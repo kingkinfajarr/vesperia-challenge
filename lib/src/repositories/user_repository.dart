@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:entrance_test/src/constants/local_data_key.dart';
 import 'package:entrance_test/src/models/request/login_request_model.dart';
+import 'package:entrance_test/src/models/request/update_profile_request_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:path_provider/path_provider.dart';
@@ -97,6 +98,19 @@ class UserRepository {
           if (total <= 0) return;
           print('percentage: ${(received / total * 100).toStringAsFixed(0)}%');
         },
+      );
+    } on DioException catch (_) {
+      rethrow;
+    }
+  }
+
+  Future<void> updateProfile(UpdateProfileRequestModel request) async {
+    try {
+      await _client.put(
+        Endpoint.updateUser,
+        data: request,
+        options: NetworkingUtil.setupNetworkOptions(
+            'Bearer ${_local.read(LocalDataKey.token)}'),
       );
     } on DioException catch (_) {
       rethrow;

@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:entrance_test/src/constants/image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../constants/color.dart';
@@ -387,6 +388,11 @@ class EditProfilePage extends GetView<EditProfileController> {
                               suffixText: 'cm',
                             ),
                             controller: controller.etHeight,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9]'),
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -442,6 +448,11 @@ class EditProfilePage extends GetView<EditProfileController> {
                               suffixText: 'kg',
                             ),
                             controller: controller.etWeight,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                RegExp(r'[0-9]'),
+                              )
+                            ],
                           ),
                         ],
                       ),
