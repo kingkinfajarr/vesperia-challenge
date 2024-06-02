@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     _getVersionInfo();
     Future.delayed(const Duration(seconds: 3), () {
-      Get.offNamed(RouteName.login);
+      Get.offNamed(RouteName.onboarding);
     });
   }
 
