@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DashboardController extends GetxController {
-
   final _selectedNavbar = 0.obs;
 
   int get selectedNavbar => _selectedNavbar.value;
@@ -19,7 +18,7 @@ class DashboardController extends GetxController {
   void onInit() {
     super.onInit();
     _listPages.value = [
-      const ProductListPage(),
+      ProductListPage(),
       const ProfilePage(),
     ];
   }

@@ -10,46 +10,59 @@ import '../../../../widgets/empty_list_state_widget.dart';
 import 'component/product_list_controller.dart';
 
 class ProductListPage extends GetWidget<ProductListController> {
-  const ProductListPage({Key? key}) : super(key: key);
+  ProductListPage({Key? key}) : super(key: key);
+
+  final ScrollController _scrollController = ScrollController();
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Scaffold(
-          backgroundColor: white,
-          body: Expanded(
-            child: RefreshIndicator(
-              onRefresh: () {
-                return Future.delayed(const Duration(seconds: 0), () {
-                  controller.getProducts();
-                });
-              },
-              child: Obx(
-                () => (controller.isLoadingRetrieveProduct)
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primary),
-                      ))
-                    : (controller.products.isEmpty)
-                        ? Stack(
-                            children: [
-                              ListView(),
-                              const Center(
-                                child: EmptyListStateWidget(
-                                  iconSource: ic_empty_data,
-                                  text: "No product to show",
-                                ),
+  Widget build(BuildContext context) {
+    _scrollController.addListener(() {
+      if (_scrollController.position.atEdge) {
+        if (_scrollController.position.pixels != 0) {
+          controller.getMoreProducts();
+        }
+      }
+    });
+
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: white,
+        body: Expanded(
+          child: RefreshIndicator(
+            onRefresh: () {
+              return Future.delayed(const Duration(seconds: 0), () {
+                controller.getProducts();
+              });
+            },
+            child: Obx(
+              () => (controller.isLoadingRetrieveProduct)
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(primary),
+                    ))
+                  : (controller.products.isEmpty)
+                      ? Stack(
+                          children: [
+                            ListView(),
+                            const Center(
+                              child: EmptyListStateWidget(
+                                iconSource: ic_empty_data,
+                                text: "No product to show",
                               ),
-                            ],
-                          )
-                        : buildProductList(context),
-              ),
+                            ),
+                          ],
+                        )
+                      : buildProductList(context),
             ),
           ),
         ),
-      );
+      ),
+    );
+  }
 
   Widget buildProductList(BuildContext context) => DynamicHeightGridView(
+      controller: _scrollController,
       physics: const AlwaysScrollableScrollPhysics(),
       crossAxisCount: 2,
       crossAxisSpacing: 16,
@@ -103,20 +116,19 @@ class ProductListPage extends GetWidget<ProductListController> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           InkWell(
-                            onTap: () => {controller.setFavorite(product)},
-                            child: Padding(
-                              padding: EdgeInsets.all(8),
-                              child: Obx(
-                                    () => Image.asset(
-                                  product.isFavorite
-                                      ? ic_favorite_filled
-                                      : ic_favorite_empty,
-                                  width: 24,
-                                  height: 24,
+                              onTap: () => {controller.setFavorite(product)},
+                              child: Padding(
+                                padding: const EdgeInsets.all(8),
+                                child: Obx(
+                                  () => Image.asset(
+                                    product.isFavorite
+                                        ? ic_favorite_filled
+                                        : ic_favorite_empty,
+                                    width: 24,
+                                    height: 24,
+                                  ),
                                 ),
-                              ),
-                            )
-                          )
+                              ))
                         ],
                       ),
                     ],
