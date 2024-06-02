@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:entrance_test/src/constants/local_data_key.dart';
+import 'package:entrance_test/src/models/request/login_request_model.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../../app/routes/route_name.dart';
 import '../constants/endpoint.dart';
 import '../models/response/user_response_model.dart';
 import '../utils/networking_util.dart';
@@ -14,12 +17,25 @@ class UserRepository {
       : _client = client,
         _local = local;
 
-  Future<void> login() async {
-    //Artificial delay to simulate logging in process
-    await Future.delayed(const Duration(seconds: 2));
-    //Placeholder token. DO NOT call real logout API using this token
-    _local.write(
-        LocalDataKey.token, "621|DBiUBMfsEtX01tbdu4duNRCNMTt7PV5blr6zxTvq");
+  Future<void> login(LoginRequestModel request) async {
+    try {
+      final responseJson = await _client.post(
+        Endpoint.login,
+        data: request,
+        options: Options(
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      final token = responseJson.data['data']['token'];
+      _local.write(LocalDataKey.token, token);
+
+      Get.offAllNamed(RouteName.dashboard);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<void> logout() async {

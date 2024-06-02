@@ -1,8 +1,8 @@
+import 'package:entrance_test/src/models/request/login_request_model.dart';
 import 'package:entrance_test/src/repositories/user_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../../../../app/routes/route_name.dart';
 import '../../../widgets/snackbar_widget.dart';
 
 class LoginController extends GetxController {
@@ -32,9 +32,18 @@ class LoginController extends GetxController {
       return;
     }
 
-    await _userRepository.login();
-    Get.offAllNamed(RouteName.dashboard);
-    isLoading.value = false;
+    try {
+      await _userRepository.login(
+        LoginRequestModel(
+          phoneNumber: etPhone.text,
+          password: etPassword.text,
+        ),
+      );
+    } catch (e) {
+      SnackbarWidget.showFailedSnackbar('Failed to login. Please try again.');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   bool validateInput() {
