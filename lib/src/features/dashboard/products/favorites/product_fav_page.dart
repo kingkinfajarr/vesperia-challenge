@@ -64,7 +64,7 @@ class ProductFavPage extends GetWidget<ProductFavController> {
           ),
           child: InkWell(
             onTap: () => {
-              // controller.toProductDetail(product),
+              controller.toProductDetail(product.id ?? ''),
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),

@@ -10,4 +10,6 @@ class Endpoint {
   static const login = '/sign-in';
 
   static const logout = '/sign-out';
+
+  static const getRating = '/rating';
 }

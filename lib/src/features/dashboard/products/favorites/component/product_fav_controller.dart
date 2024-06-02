@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
+import '../../../../../../app/routes/route_name.dart';
 import '../../../../../data/db/database_helper.dart';
+import '../../../../../models/product_model.dart';
 import '../../../../../models/product_table.dart';
 
 class ProductFavController extends GetxController {
@@ -25,5 +27,10 @@ class ProductFavController extends GetxController {
 
   void refreshFavorites() async {
     await _loadFavorites();
+  }
+
+  void toProductDetail(String id) async {
+    //TODO: finish this implementation by creating product detail page & calling it here
+    Get.toNamed(RouteName.productDetail, arguments: id);
   }
 }

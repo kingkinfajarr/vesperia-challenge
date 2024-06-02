@@ -25,3 +25,4 @@ const ic_favorite_filled = 'assets/icons/icon-favorite-filled.png';
 
 const ic_visible = 'assets/icons/icon-visible.png';
 const ic_invisible = 'assets/icons/icon-invisible.png';
+const ic_star = 'assets/icons/icon-star.png';

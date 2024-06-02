@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 
+import '../../../../../../app/routes/route_name.dart';
 import '../../../../../data/db/database_helper.dart';
 import '../../../../../models/product_model.dart';
 import '../../../../../models/product_table.dart';
@@ -120,6 +121,7 @@ class ProductListController extends GetxController {
 
   void toProductDetail(ProductModel product) async {
     //TODO: finish this implementation by creating product detail page & calling it here
+    Get.toNamed(RouteName.productDetail, arguments: product.id);
   }
 
   void setFavorite(ProductModel product) async {

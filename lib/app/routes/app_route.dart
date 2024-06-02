@@ -3,6 +3,8 @@ import 'package:entrance_test/splash_page.dart';
 import 'package:entrance_test/src/features/dashboard/component/dashboard_binding.dart';
 import 'package:entrance_test/src/features/dashboard/dashboard_page.dart';
 import 'package:entrance_test/src/features/dashboard/profile/edit/edit_profile_page.dart';
+import 'package:entrance_test/src/features/detail_product/component/detail_product_binding.dart';
+import 'package:entrance_test/src/features/detail_product/detail_product_page.dart';
 import 'package:entrance_test/src/features/onboarding/component/onboarding_binding.dart';
 import 'package:entrance_test/src/features/onboarding/onboarding_page.dart';
 import 'package:get/get.dart';
@@ -41,6 +43,11 @@ class AppRoute {
     GetPage(
       name: RouteName.webView,
       page: () => const WebViewPage(),
+    ),
+    GetPage(
+      name: RouteName.productDetail,
+      page: () => const DetailProductPage(),
+      binding: DetailProductBinding(),
     ),
   ];
 }
