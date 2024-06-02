@@ -1,13 +1,19 @@
 import 'package:get/get.dart';
 
+import '../../../../../data/db/database_helper.dart';
 import '../../../../../models/product_model.dart';
+import '../../../../../models/product_table.dart';
 import '../../../../../models/request/product_list_request_model.dart';
 import '../../../../../repositories/product_repository.dart';
 import '../../../../../utils/networking_util.dart';
 import '../../../../../widgets/snackbar_widget.dart';
+import '../../favorites/component/product_fav_controller.dart';
 
 class ProductListController extends GetxController {
   final ProductRepository _productRepository;
+  final DatabaseHelper _databaseHelper = DatabaseHelper();
+  final ProductFavController _productFavController =
+      Get.find<ProductFavController>();
 
   ProductListController({
     required ProductRepository productRepository,
@@ -94,7 +100,24 @@ class ProductListController extends GetxController {
     //TODO: finish this implementation by creating product detail page & calling it here
   }
 
-  void setFavorite(ProductModel product) {
+  void setFavorite(ProductModel product) async {
     product.isFavorite = !product.isFavorite;
+
+    final productTable = ProductTable.fromEntity(product);
+
+    // Check if the product is marked as favorite
+    if (product.isFavorite) {
+      // If marked as favorite, insert the product into the database
+      await _databaseHelper.insertFavorite(productTable);
+      final products = await _databaseHelper.getFavoritesProduct();
+      print(products);
+    } else {
+      // If unmarked as favorite, remove the product from the database
+      await _databaseHelper.removeFavorite(productTable);
+      final products = await _databaseHelper.getFavoritesProduct();
+      print(products);
+    }
+
+    _productFavController.refreshFavorites();
   }
 }

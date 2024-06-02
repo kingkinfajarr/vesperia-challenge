@@ -6,6 +6,7 @@ import 'package:entrance_test/src/repositories/user_repository.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '../products/favorites/component/product_fav_controller.dart';
 import '../profile/component/profile_controller.dart';
 
 class DashboardBinding extends Bindings {
@@ -28,6 +29,10 @@ class DashboardBinding extends Bindings {
     Get.put(ProfileController(
       userRepository: Get.find<UserRepository>(),
     ));
+
+    Get.put(ProductFavController(
+        // productRepository: Get.find<ProductRepository>(),
+        ));
 
     Get.put(ProductListController(
       productRepository: Get.find<ProductRepository>(),

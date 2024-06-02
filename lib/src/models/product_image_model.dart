@@ -1,17 +1,17 @@
 class ProductImageModel {
   ProductImageModel({
-    required this.id,
-    required this.productId,
-    required this.path,
-    required this.pathSmall,
-    required this.url,
-    required this.urlSmall,
-    required this.createdAt,
-    required this.updatedAt,
+    this.id,
+    this.productId,
+    this.path,
+    this.pathSmall,
+    this.url,
+    this.urlSmall,
+    this.createdAt,
+    this.updatedAt,
   });
 
-  final String id;
-  final String productId;
+  final String? id;
+  final String? productId;
   final String? path;
   final String? pathSmall;
   final String? url;
@@ -32,13 +32,13 @@ class ProductImageModel {
       );
 
   Map<String, dynamic> toJson() => {
-    'id': id,
-    'product_id': productId,
-    'path': path,
-    'path_small': pathSmall,
-    'image_url': url,
-    'image_url_small': urlSmall,
-    'created_at': createdAt,
-    'updated_at': updatedAt,
-  };
+        'id': id,
+        'product_id': productId,
+        'path': path,
+        'path_small': pathSmall,
+        'image_url': url,
+        'image_url_small': urlSmall,
+        'created_at': createdAt,
+        'updated_at': updatedAt,
+      };
 }

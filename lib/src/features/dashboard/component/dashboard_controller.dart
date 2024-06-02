@@ -1,3 +1,4 @@
+import 'package:entrance_test/src/features/dashboard/products/favorites/product_fav_page.dart';
 import 'package:entrance_test/src/features/dashboard/products/list/product_list_page.dart';
 import 'package:entrance_test/src/features/dashboard/profile/profile_page.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class DashboardController extends GetxController {
     super.onInit();
     _listPages.value = [
       ProductListPage(),
+      const ProductFavPage(),
       const ProfilePage(),
     ];
   }

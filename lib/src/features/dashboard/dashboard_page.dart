@@ -12,7 +12,7 @@ class DashboardPage extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-            () => IndexedStack(
+        () => IndexedStack(
             index: controller.selectedNavbar, children: controller.listPages),
       ),
       bottomNavigationBar: Theme(
@@ -21,7 +21,7 @@ class DashboardPage extends GetView<DashboardController> {
           highlightColor: Colors.transparent,
         ),
         child: Obx(
-              () => BottomNavigationBar(
+          () => BottomNavigationBar(
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 label: "Products",
@@ -32,6 +32,19 @@ class DashboardPage extends GetView<DashboardController> {
                 ),
                 activeIcon: Image.asset(
                   ic_home_active,
+                  height: 24,
+                  width: 24,
+                ),
+              ),
+              BottomNavigationBarItem(
+                label: "Favorites",
+                icon: Image.asset(
+                  ic_favorite_empty,
+                  height: 24,
+                  width: 24,
+                ),
+                activeIcon: Image.asset(
+                  ic_favorite_filled,
                   height: 24,
                   width: 24,
                 ),
