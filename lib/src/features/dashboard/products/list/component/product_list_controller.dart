@@ -129,15 +129,9 @@ class ProductListController extends GetxController {
 
     // Check if the product is marked as favorite
     if (product.isFavorite) {
-      // If marked as favorite, insert the product into the database
       await _databaseHelper.insertFavorite(productTable);
-      final products = await _databaseHelper.getFavoritesProduct();
-      print(products);
     } else {
-      // If unmarked as favorite, remove the product from the database
       await _databaseHelper.removeFavorite(productTable);
-      final products = await _databaseHelper.getFavoritesProduct();
-      print(products);
     }
 
     _productFavController.refreshFavorites();
