@@ -125,43 +125,43 @@ class ProductFavPage extends GetWidget<ProductFavController> {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        // if (product.discountPrice != product.price)
-                        //   Row(
-                        //     crossAxisAlignment: CrossAxisAlignment.end,
-                        //     mainAxisAlignment: MainAxisAlignment.start,
-                        //     children: [
-                        //       Text(
-                        //         product.price.inRupiah(),
-                        //         textAlign: TextAlign.start,
-                        //         style: const TextStyle(
-                        //           fontSize: 10,
-                        //           color: gray600,
-                        //           fontWeight: FontWeight.w400,
-                        //           decoration: TextDecoration.lineThrough,
-                        //         ),
-                        //       ),
-                        //       const SizedBox(width: 4),
-                        //       Text(
-                        //         product.discountPrice.inRupiah(),
-                        //         textAlign: TextAlign.start,
-                        //         style: const TextStyle(
-                        //           fontSize: 12,
-                        //           color: red600,
-                        //           fontWeight: FontWeight.w700,
-                        //         ),
-                        //       ),
-                        //     ],
-                        //   )
-                        // else
-                        Text(
-                          (product.price ?? 0).inRupiah(),
-                          textAlign: TextAlign.start,
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: gray900,
-                            fontWeight: FontWeight.w700,
+                        if (product.discountPrice != product.price)
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                product.price.inRupiah(),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: gray600,
+                                  fontWeight: FontWeight.w400,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                product.discountPrice.inRupiah(),
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: red600,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          )
+                        else
+                          Text(
+                            (product.price ?? 0).inRupiah(),
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: gray900,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   )

@@ -64,7 +64,19 @@ class ProductListController extends GetxController {
         limit: _limit,
         skip: _skip,
       ));
-      _products.value = productList.data;
+      // Load favorites from the database
+      final favoriteProducts = await _databaseHelper.getFavoritesProduct();
+      final favoriteProductIds = favoriteProducts.map((e) => e['id']).toList();
+
+      // Update the isFavorite status based on the favorite data
+      final updatedProductList = productList.data.map((product) {
+        product.isFavorite = favoriteProductIds.contains(product.id);
+        return product;
+      }).toList();
+
+      _products.value = updatedProductList;
+
+      // _products.value = productList.data;
       _products.refresh();
       _isLastPageProduct.value = productList.data.length < _limit;
       _skip = products.length;
@@ -85,7 +97,17 @@ class ProductListController extends GetxController {
         limit: _limit,
         skip: _skip,
       ));
-      _products.value.addAll(productList.data);
+      // Load favorites from the database
+      final favoriteProducts = await _databaseHelper.getFavoritesProduct();
+      final favoriteProductIds = favoriteProducts.map((e) => e['id']).toList();
+
+      final updatedProductList = productList.data.map((product) {
+        product.isFavorite = favoriteProductIds.contains(product.id);
+        return product;
+      }).toList();
+
+      // _products.value.addAll(productList.data);
+      _products.value.addAll(updatedProductList);
       _products.refresh();
       _isLastPageProduct.value = productList.data.length < _limit;
       _skip = products.length;
@@ -119,5 +141,6 @@ class ProductListController extends GetxController {
     }
 
     _productFavController.refreshFavorites();
+    _products.refresh();
   }
 }
