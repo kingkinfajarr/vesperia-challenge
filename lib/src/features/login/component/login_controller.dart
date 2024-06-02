@@ -18,6 +18,7 @@ class LoginController extends GetxController {
 
   final etPhone = TextEditingController();
   final etPassword = TextEditingController();
+  final etCountryCode = TextEditingController(text: '62');
 
   void doLogin() async {
     if (!validateInput()) {
@@ -37,6 +38,7 @@ class LoginController extends GetxController {
         LoginRequestModel(
           phoneNumber: etPhone.text,
           password: etPassword.text,
+          countryCode: etCountryCode.text,
         ),
       );
     } catch (e) {

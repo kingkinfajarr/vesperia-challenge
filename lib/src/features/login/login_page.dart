@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -109,22 +110,30 @@ class LoginPage extends GetView<LoginController> {
                       fillColor: white,
                       filled: true,
                       hintText: 'Phone Number',
-                      prefixIcon: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 14.0),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14.0),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            SizedBox(width: 6),
-                            Text(
-                              '+62',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: gray900),
+                            // SizedBox(width: 6),
+                            CountryCodePicker(
+                              padding: EdgeInsets.zero,
+                              flagWidth: 24,
+                              onChanged: (value) {
+                                final countryCode =
+                                    value.dialCode?.replaceAll('+', '').trim();
+                                controller.etCountryCode.text =
+                                    countryCode ?? '62';
+                              },
+                              initialSelection: '+62',
+                              favorite: const ['+62', 'ID'],
+                              showCountryOnly: false,
+                              showOnlyCountryWhenClosed: false,
+                              alignLeft: false,
                             ),
-                            SizedBox(width: 12),
-                            SizedBox(
+                            const SizedBox(width: 12),
+                            const SizedBox(
                               width: 1.5,
                               height: 48,
                               child: DecoratedBox(
