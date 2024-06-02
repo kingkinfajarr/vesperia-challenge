@@ -6,7 +6,7 @@ import 'package:entrance_test/src/models/request/login_request_model.dart';
 import 'package:entrance_test/src/models/request/update_profile_request_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../app/routes/route_name.dart';
 import '../constants/endpoint.dart';
@@ -80,17 +80,16 @@ class UserRepository {
   }
 
   Future<void> downloadFile(String url, String name) async {
-    // TODO : change directory to download directory
-    final Directory? downloadsDir = await getDownloadsDirectory();
+    await Permission.storage.request();
 
-    if (downloadsDir == null) {
-      throw Exception('Download directory not found');
-    }
+    const String downloadsDir = '/storage/emulated/0/Download';
+
+    final String filePath = '$downloadsDir/$name';
 
     try {
       await _client.download(
         url,
-        (await getDownloadsDirectory())!.path + name,
+        filePath,
         options: Options(
           headers: {HttpHeaders.acceptEncodingHeader: '*'},
         ),
@@ -99,8 +98,10 @@ class UserRepository {
           print('percentage: ${(received / total * 100).toStringAsFixed(0)}%');
         },
       );
-    } on DioException catch (_) {
-      rethrow;
+      print('File downloaded to: $filePath');
+    } on DioError catch (e) {
+      print('Error downloading file: $e');
+      throw Exception('Error downloading file: $e');
     }
   }
 
