@@ -1,5 +1,7 @@
 import 'package:entrance_test/src/repositories/user_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../../app/routes/route_name.dart';
 import '../../../../utils/networking_util.dart';
@@ -24,6 +26,8 @@ class ProfileController extends GetxController {
 
   bool get isLoading => _isLoading.value;
 
+  late final WebViewController controllerWebView;
+
   ProfileController({
     required UserRepository userRepository,
   }) : _userRepository = userRepository;
@@ -32,6 +36,28 @@ class ProfileController extends GetxController {
   void onInit() {
     super.onInit();
     loadUserFromServer();
+
+    controllerWebView = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..setBackgroundColor(const Color(0x00000000))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onProgress: (int progress) {
+            // Update loading bar.
+          },
+          onPageStarted: (String url) {},
+          onPageFinished: (String url) {},
+          onHttpError: (HttpResponseError error) {},
+          onWebResourceError: (WebResourceError error) {},
+          onNavigationRequest: (NavigationRequest request) {
+            if (request.url.startsWith('https://www.youtube.com/')) {
+              return NavigationDecision.prevent;
+            }
+            return NavigationDecision.navigate;
+          },
+        ),
+      )
+      ..loadRequest(Uri.parse('https://www.youtube.com/watch?v=lpnKWK-KEYs'));
   }
 
   void loadUserFromServer() async {
@@ -74,7 +100,10 @@ class ProfileController extends GetxController {
     }
   }
 
-  onOpenWebPageClick() {}
+  onOpenWebPageClick(String url) async {
+    // controllerWebView.loadRequest(Uri.parse(url));
+    Get.toNamed(RouteName.webView, arguments: url);
+  }
 
   void doLogout() async {
     _isLoading.value = true;

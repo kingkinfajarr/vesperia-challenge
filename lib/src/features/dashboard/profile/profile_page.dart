@@ -105,7 +105,9 @@ class ProfilePage extends GetView<ProfileController> {
                     );
                   }),
                   iconTileProfile(ic_webpage, "Open Webpage", () {
-                    controller.onOpenWebPageClick();
+                    controller.onOpenWebPageClick(
+                      'https://www.youtube.com/watch?v=lpnKWK-KEYs',
+                    );
                   }),
                   const SizedBox(height: 16),
                   Container(

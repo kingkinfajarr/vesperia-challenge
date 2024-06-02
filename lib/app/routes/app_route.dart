@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import '../../src/features/dashboard/profile/edit/component/edit_profile_binding.dart';
 import '../../src/features/login/component/login_binding.dart';
 import '../../src/features/login/login_page.dart';
+import '../../src/features/web_view/web_view_page.dart';
 
 class AppRoute {
   static final pages = [
@@ -29,6 +30,10 @@ class AppRoute {
       name: RouteName.editProfile,
       page: () => const EditProfilePage(),
       binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: RouteName.webView,
+      page: () => const WebViewPage(),
     ),
   ];
 }

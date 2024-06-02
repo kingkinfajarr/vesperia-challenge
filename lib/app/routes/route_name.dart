@@ -4,4 +4,5 @@ abstract class RouteName {
   static const dashboard = "/dashboard";
 
   static const editProfile = '/profile/edit';
+  static const webView = '/webview';
 }
