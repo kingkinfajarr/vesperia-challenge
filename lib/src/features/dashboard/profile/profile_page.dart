@@ -172,11 +172,38 @@ class ProfilePage extends GetView<ProfileController> {
               textColor: red600,
               textLabel: "Sign Out",
               onClick: () {
-                controller.doLogout();
+                showLogoutConfirmation(context);
               },
               isLoading: controller.isLoading,
             ),
           ),
         ),
       );
+
+  void showLogoutConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Logout"),
+          content: const Text("Are you sure you want to sign out?"),
+          actions: [
+            TextButton(
+              child: const Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text("Sign Out"),
+              onPressed: () {
+                controller.doLogout();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
