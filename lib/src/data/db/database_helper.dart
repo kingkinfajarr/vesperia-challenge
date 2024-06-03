@@ -34,7 +34,8 @@ class DatabaseHelper {
         name TEXT,
         price INTEGER,
         discount_price INTEGER,
-        image TEXT
+        image TEXT,
+        is_favorite INTEGER
       );
     ''');
   }

@@ -33,4 +33,20 @@ class ProductFavController extends GetxController {
     //TODO: finish this implementation by creating product detail page & calling it here
     Get.toNamed(RouteName.productDetail, arguments: id);
   }
+
+  void setFavorite(ProductModel product) async {
+    product.isFavorite = !product.isFavorite;
+
+    final productTable = ProductTable.fromEntity(product);
+
+    // Check if the product is marked as favorite
+    if (product.isFavorite) {
+      await _databaseHelper.insertFavorite(productTable);
+    } else {
+      await _databaseHelper.removeFavorite(productTable);
+    }
+
+    refreshFavorites();
+    _listProduct.refresh();
+  }
 }
